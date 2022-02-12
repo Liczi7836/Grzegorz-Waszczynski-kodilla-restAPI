@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/v1/tasks")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class TaskController {
 
     private final DbService service;
