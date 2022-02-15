@@ -13,9 +13,12 @@ goto fail
 
 :stoptomcat
 call %CATALINA_HOME%\bin\shutdown.bat
+goto copyfile
 
 :copyfile
-copy build\libs\crud.war %CATALINA_HOME%\webapps
+echo kopiujemy
+copy build\libs\crud.war %CATALINA_HOME%\webapps\crud.war
+echo skopiowane
 if "%ERRORLEVEL%" == "0" goto runtomcat
 echo Cannot copy file
 goto fail
