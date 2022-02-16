@@ -53,6 +53,6 @@ public class TrelloClient {
                 .encode()
                 .toUri();
 
-            return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+        return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
 }

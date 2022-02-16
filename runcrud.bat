@@ -16,9 +16,7 @@ call %CATALINA_HOME%\bin\shutdown.bat
 goto copyfile
 
 :copyfile
-echo kopiujemy
-copy build\libs\crud.war %CATALINA_HOME%\webapps\crud.war
-echo skopiowane
+copy build\libs\crud.war %CATALINA_HOME%\webapps
 if "%ERRORLEVEL%" == "0" goto runtomcat
 echo Cannot copy file
 goto fail

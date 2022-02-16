@@ -17,8 +17,6 @@ public class TrelloController {
 
     private final TrelloClient trelloClient;
 
-
-
     @GetMapping("boards")
     public void getTrelloBoards(){
 
