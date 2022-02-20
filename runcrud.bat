@@ -13,6 +13,7 @@ goto fail
 
 :stoptomcat
 call %CATALINA_HOME%\bin\shutdown.bat
+goto copyfile
 
 :copyfile
 copy build\libs\crud.war %CATALINA_HOME%\webapps
