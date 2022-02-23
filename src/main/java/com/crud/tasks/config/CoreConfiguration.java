@@ -20,7 +20,6 @@ public class CoreConfiguration {
         return new RestTemplate();
     }
 
-
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
