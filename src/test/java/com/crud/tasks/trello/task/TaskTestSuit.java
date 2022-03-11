@@ -65,8 +65,10 @@ public class TaskTestSuit {
         ResponseEntity<TaskDto> anotherTaskDto = taskController.getTask(taskDto.getId());
 
         //Then
-        assertEquals(taskDto.getTitle(), anotherTaskDto);
+        assertEquals(taskDto.getTitle(), anotherTaskDto.getBody().getTitle());
 
     }
+
+
 
 }
