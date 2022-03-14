@@ -106,20 +106,5 @@ public class TrelloFacadeTestSuit {
         });
     }
 
-    @Test
-    public void trelloBoardValidatorTest(){
-        //Given
-        List<TrelloList> mappedTrelloLists =
-                List.of(new TrelloList("1", "list", false));
-        List<TrelloBoard> trelloBoardss = List.of(
-                new TrelloBoard("1", "something", mappedTrelloLists),
-                new TrelloBoard("2", "somethint too", mappedTrelloLists));
-
-        //When
-        List<TrelloBoard> newTrelloBoardList = trelloValidator.validateTrelloBoards(trelloBoardss);
-
-        //Then
-        assertEquals(trelloBoardss.get(0).getId(), newTrelloBoardList.get(0).getId());
-    }
 
 }

@@ -20,7 +20,9 @@ public class DbService {
     }
 
     public Task getTaskBy(Long id) throws TaskNotFoundException {
-        return repository.findById(id).orElseThrow(TaskNotFoundException::new);
+        return repository
+                .findById(id)
+                .orElseThrow(TaskNotFoundException::new);
     }
 
     public Task saveTask(final Task task){
