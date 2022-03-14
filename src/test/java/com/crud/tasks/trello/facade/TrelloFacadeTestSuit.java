@@ -17,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
@@ -105,21 +104,4 @@ public class TrelloFacadeTestSuit {
             });
         });
     }
-
-    @Test
-    public void trelloBoardValidatorTest(){
-        //Given
-        List<TrelloList> mappedTrelloLists =
-                List.of(new TrelloList("1", "list", false));
-        List<TrelloBoard> trelloBoardss = List.of(
-                new TrelloBoard("1", "something", mappedTrelloLists),
-                new TrelloBoard("2", "somethint too", mappedTrelloLists));
-
-        //When
-        List<TrelloBoard> newTrelloBoardList = trelloValidator.validateTrelloBoards(trelloBoardss);
-
-        //Then
-        assertEquals(trelloBoardss.get(0).getId(), newTrelloBoardList.get(0).getId());
-    }
-
 }

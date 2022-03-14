@@ -1,7 +1,6 @@
 package com.crud.tasks.trello.task;
 
 import com.crud.tasks.controller.TaskController;
-import com.crud.tasks.controller.TaskNotFoundException;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -54,21 +52,4 @@ public class TaskTestSuit {
         assertEquals(taskDto.getTitle(), task.getTitle());
         assertEquals(taskDto.getContent(), task.getContent());
     }
-
-    @Test
-    public void saveTaskAndGetByIdTest() throws TaskNotFoundException {
-        //Given
-        TaskDto taskDto = new TaskDto(1L, "First task", "First task description");
-        taskController.createTask(taskDto);
-
-        //When
-        ResponseEntity<TaskDto> anotherTaskDto = taskController.getTask(taskDto.getId());
-
-        //Then
-        assertEquals(taskDto.getTitle(), anotherTaskDto.getBody().getTitle());
-
-    }
-
-
-
 }
