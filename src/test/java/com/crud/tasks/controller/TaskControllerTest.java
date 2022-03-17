@@ -2,7 +2,6 @@ package com.crud.tasks.controller;
 
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
-import com.crud.tasks.mapper.TaskMapper;
 import com.google.gson.Gson;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -19,8 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringJUnitWebConfig
 @WebMvcTest(TaskController.class)
@@ -32,8 +30,6 @@ class TaskControllerTest {
     @MockBean
     private TaskController taskController;
 
-    @MockBean
-    private TaskMapper taskMapper;
 
     @Test
     public void shouldGetEmptyTaskList() throws Exception {
@@ -98,39 +94,31 @@ class TaskControllerTest {
     @Test
     public void shouldDeleteTask() throws Exception {
         //Given
-        Task firstTask = new Task(1L, "First task", "First task content");
-
-        when(taskController.deleteTask(firstTask.getId())).thenThrow();
-
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .delete("http://test.com/v1/tasks/1")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.nullValue()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.nullValue()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.nullValue()));
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        verify(taskController, times(1)).deleteTask(1L);
     }
 
     @Test
     public void shouldCreateTask() throws Exception{
+        //Given
         TaskDto testTask = new TaskDto(1L, "First task", "First task content");
-
-        doNothing().doThrow().when(taskController).createTask(testTask);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(testTask);
-
-        //When & Then
+        // When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .post("http://test.com/v1/tasks")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1L)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("First task")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("First task content")));
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        verify(taskController, times(1)).createTask(testTask);
     }
 
 
