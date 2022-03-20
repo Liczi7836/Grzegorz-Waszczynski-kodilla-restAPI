@@ -115,10 +115,11 @@ class TaskControllerTest {
     public void shouldCreateTask() throws Exception{
         //Given
         Task testTask = new Task(1L, "First task", "First task content");
-        TaskDto secondTestTask = new TaskDto(2L, "Second task", "Second task content");
+        Task secondTestTask = new Task(2L, "Second task", "Second task content");
+        TaskDto thirdTestTask = new TaskDto(3L, "Third task", "Third task content");
 
-        when(dbService.saveTask(testTask)).thenReturn(testTask);
-        when(taskMapper.mapToTask(secondTestTask)).thenReturn(testTask);
+        when(dbService.saveTask(testTask)).thenReturn(secondTestTask);
+        when(taskMapper.mapToTaskDto(secondTestTask)).thenReturn(thirdTestTask);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(testTask);
@@ -130,6 +131,6 @@ class TaskControllerTest {
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-        verify(dbService, times(1)).saveTask(testTask);
+        verify(dbService, times(1)).saveTask(taskMapper.mapToTask(thirdTestTask));
     }
 }
