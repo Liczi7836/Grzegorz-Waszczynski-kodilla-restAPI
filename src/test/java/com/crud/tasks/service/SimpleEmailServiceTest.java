@@ -8,7 +8,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -41,7 +43,7 @@ class SimpleEmailServiceTest {
         simpleEmailService.send(mail);
 
         //Then
-        verify(javaMailSender, times(1)).send(simpleMailMessage);
+        verify(javaMailSender, times(1)).send(any(MimeMessagePreparator.class));
     }
 
 }
