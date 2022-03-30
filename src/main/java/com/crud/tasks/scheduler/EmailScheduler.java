@@ -21,13 +21,13 @@ public class EmailScheduler {
     public void sendInformationEmail(){
         long size = taskRepository.count();
         String task = (size > 1) ? " tasks" : " task";
-        simpleEmailService.send(
-                new Mail(
-                        adminConfig.getAdminMail(),
-                        SUBJECT,
-                        "Currently in database you got: " + size + task,
-                        null
-                )
+        Mail mail = new Mail(
+                adminConfig.getAdminMail(),
+                SUBJECT,
+                "Currently in database you got: " + size + task,
+                null
         );
+        System.out.println(mail + "to ten mail");
+        simpleEmailService.send(mail);
     }
 }

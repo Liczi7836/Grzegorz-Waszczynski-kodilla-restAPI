@@ -2,11 +2,12 @@ package com.crud.tasks;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @SpringBootApplication
+//@EnableSwagger2
+@EnableWebMvc
 //public class TasksApplication extends SpringBootServletInitializer {
 public class TasksApplication {
 
